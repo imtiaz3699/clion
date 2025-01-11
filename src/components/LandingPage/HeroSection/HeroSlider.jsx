@@ -5,8 +5,7 @@ import { FaArrowRight } from "react-icons/fa6";
 import { useUser } from "../../../context/context";
 
 function HeroSlider() {
-  const { products } = useUser();
-  console.log(products?.data[0]?.url, "UserUser");
+
   return (
     <>
       <div className="flex flex-row items-center justify-between h-full gap-[36px]">

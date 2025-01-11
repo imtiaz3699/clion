@@ -29,22 +29,27 @@ export const UserProvider = ({ children }) => {
       
     }
   };
+  const fetchProducts = async () => {
+    const response = await axios.get('https://dummyjson.com/products/category/smartphones');
+    return response.data;
+  };
 
   const products = useQuery({
     queryKey: ['products'],
     queryFn:fetchProductImages,
     staleTime: 1000 * 60 * 60,
-  }
-    
-  );
-  console.log(products,'fadlsjfhlasdjkhflkjdsh')
-
+  });
+  const jsonProducts = useQuery({
+    queryKey: ['jsonProductss'],
+    queryFn:fetchProducts,
+    staleTime: 1000 * 60 * 60,
+  });
+  console.log(jsonProducts,'JsonProductsFinal')
   const logout = () => {
     setUser(null);
   };
-
   return (
-    <UserContext.Provider value={{ user, login, logout,products }}>
+    <UserContext.Provider value={{ user, login, logout,products,jsonProducts }}>
       {children}
     </UserContext.Provider>
   );

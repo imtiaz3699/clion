@@ -1,12 +1,11 @@
 import React from "react";
 import HeroSlider from "./HeroSlider";
-import { useUser } from "../../../context/context";
+
 import { Button } from "antd";
 import { FaArrowRight } from "react-icons/fa6";
 
 function HeroSection() {
-  const { user } = useUser();
-  console.log(user, "IamUser");
+
   return (
     <div className="mt-6 flex items-center justify-center">
       <div className="max-w-[1320px] h-[520px]  w-full flex flex-row items-center justify-between gap-[24px]">
