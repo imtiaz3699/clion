@@ -7,6 +7,7 @@ import OurCommitments from './components/OurCommitments/OurCommitments'
 import BestDeals from './components/LandingPage/HeroSection/BestDeals/BestDeals'
 import Categories from './components/Categories/Categories'
 import FeaturedProducts from './components/LandingPage/FeaturedProducts/FeaturedProducts'
+import SaleeProduct from './components/LandingPage/SaleProduct/SaleeProduct'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,6 +19,8 @@ function App() {
     <BestDeals/>
     <Categories/>
     <FeaturedProducts/>
+    <SaleeProduct/>
+    
     </div>
   )
 }
