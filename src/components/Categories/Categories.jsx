@@ -4,7 +4,6 @@ import { useUser } from '../../context/context'
 function Categories() {
     const categories = ['']
     const {productCategories}  = useUser();
-    console.log(productCategories,'Productfahdslfjhasdlkfjhasdlfkjhasdlfkjhsd')
   return (
     <div className = 'w-full flex items-center justify-center mt-[72px] flex-col'>
         <div className = 'w-full text-center text-[30px] font-bold'>Shop With Categories</div>
@@ -19,10 +18,7 @@ function Categories() {
             </div>
             })     
         }       
-        
-
     </div>
-      
     </div>
   )
 }
