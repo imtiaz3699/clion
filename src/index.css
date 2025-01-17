@@ -17,3 +17,9 @@
   color: red;
 }
 
+.productDetailModal {
+  .ant-modal-content {
+    border-radius: 8px;
+    padding: 0px;
+  }
+}

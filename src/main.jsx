@@ -11,8 +11,13 @@ import { UserProvider } from "./context/context.jsx";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { QueryClient } from "@tanstack/react-query";
 import Footer from "./components/sharedComponents/Footer/Footer.jsx";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import { ModalProvider } from "./context/productDetail.jsx";
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
+  <Provider store={store}>
+  <ModalProvider>
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <UserProvider>
@@ -27,4 +32,6 @@ createRoot(document.getElementById("root")).render(
       </UserProvider>
     </BrowserRouter>
   </QueryClientProvider>
+  </ModalProvider>
+  </Provider>
 );

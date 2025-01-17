@@ -3,9 +3,12 @@ import React from "react";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { FaArrowRight } from "react-icons/fa6";
 import { useUser } from "../../../context/context";
+import { useModal } from "../../../context/productDetail";
+import { useDispatch } from "react-redux";
 
 function HeroSlider() {
-
+  const {handleOpenModal} = useModal();
+  const dispatch = useDispatch();
   return (
     <>
       <div className="flex flex-row items-center justify-between h-full gap-[36px]">
@@ -25,6 +28,7 @@ function HeroSlider() {
               icon={<FaArrowRight />}
               iconPosition="end"
               type="primary"
+            onClick={()=>  dispatch(handleOpenModal("quantity")) }
             >
               Shop Now
             </Button>
