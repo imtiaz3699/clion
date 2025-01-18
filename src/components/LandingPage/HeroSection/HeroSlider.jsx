@@ -7,8 +7,10 @@ import { useModal } from "../../../context/productDetail";
 import { useDispatch } from "react-redux";
 
 function HeroSlider() {
-  const {handleOpenModal} = useModal();
+  const { handleOpenModal } = useModal();
   const dispatch = useDispatch();
+  const {jsonProducts} = useUser();
+    console.log(jsonProducts?.data?.products,'fadslfhadlsfkjhasdlkjfhalsdkjfh')
   return (
     <>
       <div className="flex flex-row items-center justify-between h-full gap-[36px]">
@@ -28,7 +30,7 @@ function HeroSlider() {
               icon={<FaArrowRight />}
               iconPosition="end"
               type="primary"
-            onClick={()=>  dispatch(handleOpenModal("quantity")) }
+              onClick={() => dispatch(handleOpenModal(jsonProducts?.data?.products[10]))}
             >
               Shop Now
             </Button>

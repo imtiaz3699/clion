@@ -14,6 +14,7 @@ import Footer from "./components/sharedComponents/Footer/Footer.jsx";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { ModalProvider } from "./context/productDetail.jsx";
+import ProductListing from "./pages/productListing";
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -22,10 +23,12 @@ createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <UserProvider>
         <ConfigProvider theme={theme}>
+        
           <Navbar />
           <Routes>
             <Route index element={<App />} />
             <Route path="/project-detail" element={<ProjectDetail />} />
+            <Route path="/project-listing" element={<ProductListing />} />
           </Routes>
           <Footer/>
         </ConfigProvider>
