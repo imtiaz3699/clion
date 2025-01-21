@@ -4,6 +4,12 @@ import { GoGitCompare } from "react-icons/go";
 import { IoCopyOutline } from "react-icons/io5";
 import { CiFacebook } from "react-icons/ci";
 import { IoLogoInstagram } from "react-icons/io5";
+import { SlBadge } from "react-icons/sl";
+import { LiaTruckSolid } from "react-icons/lia";
+import { PiHandshakeLight } from "react-icons/pi";
+import { TfiHeadphoneAlt } from "react-icons/tfi";
+import { GoCreditCard } from "react-icons/go";
+
 
 
 export const CartIcon = ({ className }) => {
@@ -27,4 +33,18 @@ export const FacebookIcon = ({className}) => {
 export const InstagramIcon = ({className}) => {
     return <IoLogoInstagram className = {className}/>
 }
-
+export const Guarantee = ({className}) => {
+    return <PiHandshakeLight className = {className}/>
+}
+export const Shipping = ({className}) => {
+    return <LiaTruckSolid className = {className}/>
+}
+export const Warranty = ({className}) => {
+    return <SlBadge className = {className}/>
+}
+export const Support = ({className}) => {
+    return <TfiHeadphoneAlt className = {className}/>
+}
+export const Payment = ({className}) => {
+    return <GoCreditCard className = {className}/>
+}

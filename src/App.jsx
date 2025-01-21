@@ -20,7 +20,6 @@ function App() {
     <Categories/>
     <FeaturedProducts/>
     <SaleeProduct/>
-    
     </div>
   )
 }
