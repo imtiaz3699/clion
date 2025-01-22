@@ -15,6 +15,8 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { ModalProvider } from "./context/productDetail.jsx";
 import ProductListing from "./pages/productListing";
+import WishList from "./pages/wishlist/WishList.jsx";
+import Cart from "./pages/cart/index.jsx";
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -28,6 +30,8 @@ createRoot(document.getElementById("root")).render(
             <Route index element={<App />} />
             <Route path="/product_detail" element={<ProjectDetail />} />
             <Route path="/product_listing" element={<ProductListing />} />
+            <Route path="/wish_list" element={<WishList />} />
+            <Route path="/cart" element={<Cart />} />
           </Routes>
           <Footer/>
         </ConfigProvider>

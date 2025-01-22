@@ -9,7 +9,7 @@ import { LiaTruckSolid } from "react-icons/lia";
 import { PiHandshakeLight } from "react-icons/pi";
 import { TfiHeadphoneAlt } from "react-icons/tfi";
 import { GoCreditCard } from "react-icons/go";
-
+import { AiOutlineCloseCircle } from "react-icons/ai";
 
 
 export const CartIcon = ({ className }) => {
@@ -47,4 +47,7 @@ export const Support = ({className}) => {
 }
 export const Payment = ({className}) => {
     return <GoCreditCard className = {className}/>
+}
+export const CloseIcon = ({className}) => {
+    return <AiOutlineCloseCircle className = {className}/>
 }
