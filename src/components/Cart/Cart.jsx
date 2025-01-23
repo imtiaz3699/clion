@@ -6,7 +6,9 @@ import { LuHeart } from "react-icons/lu";
 import { Dropdown, Button, List, Divider } from "antd";
 import { ShoppingCartOutlined, CloseOutlined } from "@ant-design/icons";
 import { useUser } from "../../context/context";
+import { useNavigate } from "react-router";
 function Cart() {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const {jsonProducts} = useUser();
   console.log(jsonProducts?.data?.products[5]?.images[0],'JsonProductsFinally')
@@ -78,7 +80,7 @@ function Cart() {
       <Button type="primary" className = '!h-[48px]' block style={{ marginBottom: "10px" }}>
         CHECKOUT NOW →
       </Button>
-      <Button type="default" block className = '!h-[48px] border-[1x] border-[#FA8232] text-[#FA8232]'>
+      <Button  onClick = {()=> navigate('/cart')} type="default" block className = '!h-[48px] border-[1x] border-[#FA8232] text-[#FA8232]'>
         VIEW CART
       </Button>
       </div>

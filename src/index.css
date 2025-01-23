@@ -23,3 +23,11 @@
     padding: 0px;
   }
 }
+
+.ant-table-thead > tr > th {
+  background-color: #F2F4F5 !important;
+  color: #475156 !important;
+  font-weight: 400;
+  text-align: center;  
+}
+

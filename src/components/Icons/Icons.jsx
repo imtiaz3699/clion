@@ -10,7 +10,9 @@ import { PiHandshakeLight } from "react-icons/pi";
 import { TfiHeadphoneAlt } from "react-icons/tfi";
 import { GoCreditCard } from "react-icons/go";
 import { AiOutlineCloseCircle } from "react-icons/ai";
-
+import { FaMinus } from "react-icons/fa6";
+import { LuPlus } from "react-icons/lu";
+import { FaArrowRight } from "react-icons/fa6";
 
 export const CartIcon = ({ className }) => {
   return <BsCart2 className={className} />;
@@ -50,4 +52,13 @@ export const Payment = ({className}) => {
 }
 export const CloseIcon = ({className}) => {
     return <AiOutlineCloseCircle className = {className}/>
+}
+export const MinusIcon = ({className}) => {
+    return <FaMinus className = {className}/>
+}
+export const PlusIcon = ({className}) => {
+    return <LuPlus className = {className}/>
+}
+export const RightArrowIcon = ({className}) => {
+    return <FaArrowRight className = {className}/>
 }
