@@ -17,6 +17,7 @@ import { ModalProvider } from "./context/productDetail.jsx";
 import ProductListing from "./pages/productListing";
 import WishList from "./pages/wishlist/WishList.jsx";
 import Cart from "./pages/cart/index.jsx";
+import Checkout from "./pages/checkout/index.jsx";
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -32,6 +33,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="/product_listing" element={<ProductListing />} />
             <Route path="/wish_list" element={<WishList />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
           <Footer/>
         </ConfigProvider>
