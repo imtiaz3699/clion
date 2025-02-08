@@ -13,6 +13,8 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { FaMinus } from "react-icons/fa6";
 import { LuPlus } from "react-icons/lu";
 import { FaArrowRight } from "react-icons/fa6";
+import { FaGoogle } from "react-icons/fa";
+import { IoLogoApple } from "react-icons/io5";
 
 export const CartIcon = ({ className }) => {
   return <BsCart2 className={className} />;
@@ -61,4 +63,10 @@ export const PlusIcon = ({className}) => {
 }
 export const RightArrowIcon = ({className}) => {
     return <FaArrowRight className = {className}/>
+}
+export const GoogleIcon = ({className}) => {
+    return <FaGoogle className = {className}/>
+}
+export const AppleIcon = ({className}) => {
+    return <IoLogoApple className = {className}/>
 }

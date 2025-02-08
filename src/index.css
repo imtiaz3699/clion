@@ -31,3 +31,19 @@
   text-align: center;  
 }
 
+
+
+.ant-tabs-tab{
+  width: 212px;
+  margin: 0px !important;
+  text-align: center !important;
+}
+.ant-tabs-tab-btn{
+  width: 100%  !important;
+  text-align: center;
+  font-weight: 600;
+  font-size: 20px;
+}
+.auth-card .ant-card-body{
+  padding: 0px !important;
+}
