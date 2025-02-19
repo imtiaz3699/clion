@@ -15,6 +15,7 @@ import { LuPlus } from "react-icons/lu";
 import { FaArrowRight } from "react-icons/fa6";
 import { FaGoogle } from "react-icons/fa";
 import { IoLogoApple } from "react-icons/io5";
+import { VscSignOut } from "react-icons/vsc";
 
 export const CartIcon = ({ className }) => {
   return <BsCart2 className={className} />;
@@ -69,4 +70,7 @@ export const GoogleIcon = ({className}) => {
 }
 export const AppleIcon = ({className}) => {
     return <IoLogoApple className = {className}/>
+}
+export const LogoutIcon = ({className}) => {
+    return <VscSignOut className = {className}/>
 }

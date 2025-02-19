@@ -2,8 +2,8 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const API = axios.create({
-  baseURL: import.meta.env.BASE_URL, 
-  withCredentials: true,
+  baseURL: import.meta.env.VITE_BASE_URL, 
+  withCredentials:true
 });
 
 API.interceptors.request.use(

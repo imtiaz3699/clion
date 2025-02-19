@@ -1,12 +1,12 @@
-import React,{Fragment} from "react";
+import React, { Fragment } from "react";
 import { useUser } from "../../context/context";
 import ListingFilter from "./ListingFilter";
 import ProductCard from "../ProductCard/ProductCard";
 import { Pagination } from "antd";
 
 function Listing() {
-  const {jsonProducts} = useUser();
-  console.log(jsonProducts,'ProductListingJson')
+  const { jsonProducts } = useUser();
+  console.log(jsonProducts, "ProductListingJson");
   return (
     <div className="flex flex-col gap-[24px] w-full">
       <ListingFilter />
@@ -17,14 +17,13 @@ function Listing() {
               product={product}
               // showFunction={true}
               // showFunctionality={showFunctionality}
-              // handleFunctionality={handleFunctionality} 
-
-              />
+              // handleFunctionality={handleFunctionality}
+            />
           </Fragment>
         ))}
       </div>
-      <div className = 'flex items-center justify-center w-full'>
-      <Pagination defaultCurrent={1} total={50} />
+      <div className="flex items-center justify-center w-full">
+        <Pagination defaultCurrent={1} total={50} />
       </div>
     </div>
   );

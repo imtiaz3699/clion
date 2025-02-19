@@ -38,35 +38,6 @@ function Navbar() {
           <IoCloseSharp className="text-[#FFFFFF]" />
         </div>
       </div>
-
-      <div className="bg-[#1B6392] w-full h-[52px] flex items-center justify-center">
-        <div className="max-w-[1320px] w-full flex flex-row items-center justify-between  text-white">
-          <p className="text-[#FFFFFF] font-medium text-[12px]">
-            Welcome to Clicon online eCommerce store.{" "}
-          </p>
-          <div className="flex flex-row items-center gap-6">
-            <div className="flex flex-row items-center gap-3">
-              <span className="text-[#FFFFFF] font-medium text-[12px]">
-                Follow us:
-              </span>
-              <FaXTwitter />
-              <BsFacebook />
-              <FaPinterestP />
-              <IoLogoYoutube />
-              <BsInstagram />
-            </div>
-            <div className="w-[1px] bg-gray-400 h-[20px]"></div>
-            <div className="flex flex-row items-center gap-[8.5px]">
-              <span className="text-[14px] font-medium">Eng</span>
-              <RiArrowDropDownLine className="text-gray-400 text-[25px]" />
-            </div>
-            <div className="flex flex-row items-center gap-[8.5px]">
-              <span className="text-[14px] font-medium">USD</span>
-              <RiArrowDropDownLine className="text-gray-400 text-[25px]" />
-            </div>
-          </div>
-        </div>
-      </div>
       <MainNav />
     </>
   );

@@ -11,14 +11,7 @@ import { SlLocationPin } from "react-icons/sl";
 import { PiHeadphonesBold } from "react-icons/pi";
 import { BsExclamationDiamond } from "react-icons/bs";
 import { FiPhoneCall } from "react-icons/fi";
-
-
-
-
-
-
-
-
+import { useUserContext } from "../../../../context/userContext";
 
 function MainNav() {
   const menu = [
@@ -43,6 +36,7 @@ function MainNav() {
       img: <BsExclamationDiamond className = 'text-[16px]'/>,
     },
   ];
+
   return (
     <div>
       <div className="border-t-[0.1px] border-[#215a80] w-full bg-[#1B6392] h-[88px] flex flex-row items-center justify-center">
@@ -51,6 +45,7 @@ function MainNav() {
           <NavSearch />
           <div className="flex flex-row items-center gap-[24px]">
             <Cart />
+            
             <User />
           </div>
         </div>

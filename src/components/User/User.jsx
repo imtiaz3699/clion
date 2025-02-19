@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
-import { Dropdown, Form, Input, Button } from "antd";
+import { Dropdown, Form, Input, Button, Divider } from "antd";
 import * as Yup from "yup";
 import {
   EyeInvisibleOutlined,
@@ -13,9 +13,14 @@ import { useUserContext } from "../../context/userContext";
 import { Spin } from "antd";
 import Cookies from "js-cookie";
 import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router";
+import { LogoutIcon } from "../Icons/Icons";
 function User() {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const { setUser, setToken, token, user,createUserMutation } = useUserContext();
+  const [isUserOpen,setIsUserOpen] = useState(false);
+  const { setUser, setToken, token, user, createUserMutation,handleLogout,loginUserMutation } =
+    useUserContext();
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -27,10 +32,10 @@ function User() {
     validationSchema: Yup.object({
       email: Yup.string().required("Email is required"),
       password: Yup.string().required("Password is required"),
-    }), 
-    
+    }),
+
     onSubmit: (values, actions) => {
-      createUserMutation.mutate(values, {
+      loginUserMutation.mutate(values, {
         onSuccess: (data) => {
           if (data?.status === 200) {
             console.log("User created successfully:", data);
@@ -54,6 +59,7 @@ function User() {
       });
     },
   });
+  
   const loginForm = (
     <div className="p-[32px] w-[424px] rounded-[8px] shadow-xl bg-white ">
       <Spin spinning={formik?.isSubmitting}>
@@ -112,6 +118,7 @@ function User() {
         <div style={{ textAlign: "center" }}>
           <p style={{ margin: "10px 0" }}>Don't have an account?</p>
           <Button
+            onClick={() => navigate("/auth/signup")}
             type="default"
             block
             className="text-[#FA8232] !h-[48px] !border-[1px] font-bold border-[#FA8232]"
@@ -122,18 +129,49 @@ function User() {
       </Spin>
     </div>
   );
+  const userData = (
+    <div className="px-[20px] py-[30px]  rounded-[5px] shadow-xl bg-white ">
+      <div className = 'flex flex-row items-center gap-2'>
+        <div className = 'w-[48px] h-[48px] rounded-full border-[1px] border-gray-500'></div>
+        <div className = 'flex flex-col '>
+        <p className = 'font-medium text-sky-500 '>{user?.firstName + " " + user?.lastName}</p>
+        <p className  = 'font-medium text-gray-700'>{user?.email}</p>
+        </div>
+      </div>
+      <Divider/>
+      <div className = 'mt-4 flex flex-col gap-3'>
+        <p className = 'text-[16px] font-medium cursor-pointer hover:text-sky-500'>Profile Setting</p>
+        <Button className = 'w-full' type = 'primary' onClick={handleLogout} icon={<LogoutIcon/> } iconPosition="start" >  Logout</Button>
+      </div> 
+    </div>
+  )
   return (
     <>
-      <Dropdown
-        overlay={loginForm}
-        trigger={["click"]}
-        open={isOpen}
-        onOpenChange={(open) => setIsOpen(open)}
-      >
-        <Button type="link" onClick={toggleDropdown}>
-          <LuUserRound className="text-[20px] text-white hover:text-gray-400 cursor-pointer delay-75" />
-        </Button>
-      </Dropdown>
+      {user?.firstName ? (
+        <div>
+          <Dropdown
+            overlay={userData}
+            trigger={["click"]}
+            open={isUserOpen}
+            onOpenChange={(open) => setIsUserOpen(open)}
+          >
+            <Button type="link" onClick={()=> setIsUserOpen(!isUserOpen)}>
+              <div className = 'w-[32px] h-[32px] rounded-full border-[1px] border-gray-400'> </div>
+            </Button>
+          </Dropdown>
+        </div>
+      ) : (
+        <Dropdown
+          overlay={loginForm}
+          trigger={["click"]}
+          open={isOpen}
+          onOpenChange={(open) => setIsOpen(open)}
+        >
+          <Button type="link" onClick={toggleDropdown}>
+            <LuUserRound className="text-[20px] text-white hover:text-gray-400 cursor-pointer delay-75" />
+          </Button>
+        </Dropdown>
+    )}
     </>
   );
 }

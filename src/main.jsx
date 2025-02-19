@@ -21,6 +21,7 @@ import Checkout from "./pages/checkout/index.jsx";
 import Login from "./components/Auth/Login/index.jsx";
 import Signup from "./components/Auth/Signup/index.jsx";
 import AuthTabs from "./pages/AuthTabs/index.jsx";
+import ProfileSettings from "./pages/profileSettings/index.jsx";
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -35,6 +36,7 @@ createRoot(document.getElementById("root")).render(
                   <Route index element={<App />} />
                   <Route path="/product_detail" element={<ProjectDetail />} />
                   <Route path="/product_listing" element={<ProductListing />} />
+                  <Route path="/profile_settings" element={<ProfileSettings />} />
                   <Route path="/wish_list" element={<WishList />} />
                   <Route path="/cart" element={<Cart />} />
                   <Route path="/checkout" element={<Checkout />} />

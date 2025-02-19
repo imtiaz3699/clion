@@ -26,11 +26,16 @@ export const UserProviderAuth = ({ children }) => {
     Cookies.remove('user');
     setUser(null);
   };
-  console.log(token,'conrtexttoken'); 
+ 
   const loginUserMutation = useMutation(loginUser,{})
   const createUserMutation = useMutation(addUser,{}) 
+  const handleLogout = () => {
+    Cookies.remove('user');
+    setUser(null);
+    setToken(null);
+  }
   return (
-    <UserContextAuth.Provider value={{ setUser,user, login, logout,token,setToken,loginUserMutation,createUserMutation}}>
+    <UserContextAuth.Provider value={{ setUser,user, login, logout,token,setToken,loginUserMutation,createUserMutation,handleLogout}}>
       {children}
     </UserContextAuth.Provider>
   );

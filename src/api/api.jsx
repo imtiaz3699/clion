@@ -1,4 +1,5 @@
 import axios from "axios";
+import API from "../helpers/axiosIntercepter";
 export const fetchProductImages = async () => {
     try {
       const response = await axios.get("https://api.pexels.com/v1/search", {
@@ -27,3 +28,13 @@ export const fetchProductImages = async () => {
     );
     return response.data;
   };
+
+
+  export const getCategories = async () => {
+    try {
+       const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/category/get-category`);
+      return response;
+    } catch (error) {
+        console.log(error,'error')
+    }
+  }
