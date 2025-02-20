@@ -1,5 +1,11 @@
 import axios from "axios";
 import API from "../helpers/axiosIntercepter";
+import Cookies from "js-cookie";
+const token = JSON.parse(Cookies.get("token"));
+console.log(token, "IamToken");
+const config = {
+  headers: { Authorization: `Bearer ${token}` },
+};
 export const loginUser = async (data) => {
   console.log(data, "fadslfhasdlkfja");
   try {
@@ -27,9 +33,13 @@ export const addUser = async (data) => {
     throw error;
   }
 };
-export const getProfile = async (data) => {
+export const updateUser = async (id,data) => {
   try {
-    const response = await API.get(`${import.meta.env.VITE_BASE_URL}/users/get-user`,);
+    const response = await axios.put(
+      `${import.meta.env.VITE_BASE_URL}/users/update-user/${id}`,
+      data,
+      config
+    );
     console.log(response.data);
     return response;
   } catch (error) {
@@ -37,4 +47,16 @@ export const getProfile = async (data) => {
     throw error;
   }
 };
-
+export const getProfile = async (data) => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_BASE_URL}/users/get-user`,
+      config
+    );
+    console.log(response.data, "consoleData");
+    return response;
+  } catch (error) {
+    console.error("API Error:", error);
+    throw error;
+  }
+};

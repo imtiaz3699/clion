@@ -8,6 +8,7 @@ import BestDeals from './components/LandingPage/HeroSection/BestDeals/BestDeals'
 import Categories from './components/Categories/Categories'
 import FeaturedProducts from './components/LandingPage/FeaturedProducts/FeaturedProducts'
 import SaleeProduct from './components/LandingPage/SaleProduct/SaleeProduct'
+import ProductListing from './components/ProductListing/ProductListing'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,11 +16,12 @@ function App() {
   return (
     <div className = 'text-black text-[50px]'>
     <HeroSection/>
-    <OurCommitments/>
-    <BestDeals/>
-    <Categories/>
-    <FeaturedProducts/>
-    <SaleeProduct/>
+    {/* <OurCommitments/> */}
+    {/* <BestDeals/> */}
+    {/* <Categories/> */}
+    {/* <FeaturedProducts/> */}
+    <ProductListing/>    
+    {/* <SaleeProduct/> */}
     </div>
   )
 }

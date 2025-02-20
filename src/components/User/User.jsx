@@ -13,10 +13,13 @@ import { useUserContext } from "../../context/userContext";
 import { Spin } from "antd";
 import Cookies from "js-cookie";
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { LogoutIcon } from "../Icons/Icons";
+import { useLocation } from "react-router";
 function User() {
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location.pathname)
   const [isOpen, setIsOpen] = useState(false);
   const [isUserOpen,setIsUserOpen] = useState(false);
   const { setUser, setToken, token, user, createUserMutation,handleLogout,loginUserMutation } =
@@ -140,7 +143,7 @@ function User() {
       </div>
       <Divider/>
       <div className = 'mt-4 flex flex-col gap-3'>
-        <p className = 'text-[16px] font-medium cursor-pointer hover:text-sky-500'>Profile Setting</p>
+        <Link to='/profile_settings' className = {`text-[16px] font-medium cursor-pointer hover:text-sky-500 ${location.pathname === '/profile_settings' ? 'text-sky-500' : ""}`}>Profile Setting</Link>
         <Button className = 'w-full' type = 'primary' onClick={handleLogout} icon={<LogoutIcon/> } iconPosition="start" >  Logout</Button>
       </div> 
     </div>
@@ -171,9 +174,11 @@ function User() {
             <LuUserRound className="text-[20px] text-white hover:text-gray-400 cursor-pointer delay-75" />
           </Button>
         </Dropdown>
+      
     )}
     </>
   );
 }
 
 export default User;
+  {/* style = {{backgroundImage:'url(/Image1.jpg)'}} */}

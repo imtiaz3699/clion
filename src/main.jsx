@@ -22,9 +22,11 @@ import Login from "./components/Auth/Login/index.jsx";
 import Signup from "./components/Auth/Signup/index.jsx";
 import AuthTabs from "./pages/AuthTabs/index.jsx";
 import ProfileSettings from "./pages/profileSettings/index.jsx";
+import { MessageProvider } from "./context/messageContext.jsx";
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
+  <MessageProvider>
     <ModalProvider>
       <QueryClientProvider client={queryClient}>
         <UserProviderAuth>
@@ -53,5 +55,6 @@ createRoot(document.getElementById("root")).render(
         </UserProviderAuth>
       </QueryClientProvider>
     </ModalProvider>
+    </MessageProvider>
   </Provider>
 );
