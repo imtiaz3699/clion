@@ -1,10 +1,13 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import { useUser } from "../../context/context";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../../redux/productReducer";
 function ProductListing() {
   const { jsonProducts } = useUser();
+  const dispatch = useDispatch();
   const [showFunctionality, setShowFunctionality] = React.useState("");
+  const {products,loading,error} = useSelector((state) => state.productReducer);
   const handleFunctionality = (id) => {
     if (id === showFunctionality) {
       setShowFunctionality("");
@@ -12,10 +15,16 @@ function ProductListing() {
       setShowFunctionality(id);
     }
   };
+  useEffect(() => {
+    if (products.length === 0) {
+      dispatch(getProducts());
+    }
+  }, [dispatch, products.length]);
+console.log(products?.data?.products,'ProductsNow')
   return (
     <div className=" w-full flex items-center justify-center  mt-[60px]">
       <div className="grid grid-cols-5 max-w-[1320px] w-full  gap-[16px]">
-        {jsonProducts?.data?.products?.map((product) => {
+        {products?.data?.products?.map((product) => {
           return (
             <Fragment key={product?.id}>
               <ProductCard

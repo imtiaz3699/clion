@@ -16,6 +16,7 @@ import { FaArrowRight } from "react-icons/fa6";
 import { FaGoogle } from "react-icons/fa";
 import { IoLogoApple } from "react-icons/io5";
 import { VscSignOut } from "react-icons/vsc";
+import { MdArrowBackIos } from "react-icons/md";
 
 export const CartIcon = ({ className }) => {
   return <BsCart2 className={className} />;
@@ -73,4 +74,7 @@ export const AppleIcon = ({className}) => {
 }
 export const LogoutIcon = ({className}) => {
     return <VscSignOut className = {className}/>
+}
+export const BackArrow = ({className}) => {
+    return <MdArrowBackIos className = {className}/>
 }
