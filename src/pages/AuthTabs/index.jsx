@@ -1,7 +1,5 @@
 import React from "react";
 import { Card, Tabs } from "antd";
-// import { useNavigate, useLocation, Outlet } from "react-router-dom";
-// import { BrowserRouter, Route, Routes } from "react-router";
 import { useNavigate, useLocation, Outlet } from "react-router";
 function AuthTabs() {
   const navigate = useNavigate();

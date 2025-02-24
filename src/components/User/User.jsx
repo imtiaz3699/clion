@@ -144,6 +144,7 @@ function User() {
       <Divider/>
       <div className = 'mt-4 flex flex-col gap-3'>
         <Link to='/profile_settings' className = {`text-[16px] font-medium cursor-pointer hover:text-sky-500 ${location.pathname === '/profile_settings' ? 'text-sky-500' : ""}`}>Profile Setting</Link>
+        <Link to='/product-settings' className = {`text-[16px] font-medium cursor-pointer hover:text-sky-500 ${location.pathname === '/profile_settings' ? 'text-sky-500' : ""}`}>Profile Setting</Link>
         <Button className = 'w-full' type = 'primary' onClick={handleLogout} icon={<LogoutIcon/> } iconPosition="start" >  Logout</Button>
       </div> 
     </div>

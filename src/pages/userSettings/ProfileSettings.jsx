@@ -38,9 +38,6 @@ function ProfileSettings() {
   return (
     <div className="flex items-center justify-center w-full">
       <div className="max-w-[1320px] w-full mt-[20px]">
-        <p className="text-[25px] font-bold text-gray-700 underline">
-          User Profile
-        </p>
         <form onSubmit={formik.handleSubmit}>
           <div className="w-full flex flex-col gap-[20px]">
             <div className="flex items-center justify-center w-full">

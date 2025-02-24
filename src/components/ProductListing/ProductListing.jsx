@@ -1,10 +1,8 @@
 import React, { Fragment, useEffect } from "react";
 import ProductCard from "../ProductCard/ProductCard";
-import { useUser } from "../../context/context";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/productReducer";
 function ProductListing() {
-  const { jsonProducts } = useUser();
   const dispatch = useDispatch();
   const [showFunctionality, setShowFunctionality] = React.useState("");
   const {products,loading,error} = useSelector((state) => state.productReducer);
@@ -20,7 +18,6 @@ function ProductListing() {
       dispatch(getProducts());
     }
   }, [dispatch, products.length]);
-console.log(products?.data?.products,'ProductsNow')
   return (
     <div className=" w-full flex items-center justify-center  mt-[60px]">
       <div className="grid grid-cols-5 max-w-[1320px] w-full  gap-[16px]">

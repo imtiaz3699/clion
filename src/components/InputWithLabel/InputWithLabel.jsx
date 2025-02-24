@@ -1,7 +1,7 @@
 import { Input, Typography } from "antd";
 import React from "react";
 
-function InputWithLabel({ label, onChange, placeholder, value, password,name,error,forgotPassword,disabled }) {
+function InputWithLabel({ label, onChange, placeholder, value, password,name,error,forgotPassword,disabled,type }) {
   return (
     <>
       {password ? (
@@ -38,6 +38,7 @@ function InputWithLabel({ label, onChange, placeholder, value, password,name,err
             className="!h-[44px]"
             name = {name}
             disabled={disabled}
+            type = {type}
           />
           {error && (
             <p className="text-red-500 text-[12px] font-medium">
