@@ -2,7 +2,6 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 import Cookies from 'js-cookie';
 import { loginUser,addUser, updateUser, getProfile } from '../api/authApi';
 import { useMutation } from "@tanstack/react-query";
-import { message } from 'antd';
 import { MessageContext } from './messageContext';
 // Create the context
 export const UserContextAuth = createContext()
@@ -34,7 +33,6 @@ export const UserProviderAuth = ({ children }) => {
   const updateUserMutation = useMutation(({ id, data }) => updateUser(id, data),{
     onSuccess: async (data) => {
       const res = await getProfile();
-      console.log(res,'fasdlfajshdlfkjasld')
       setUser(res?.data?.data);
       Cookies.set('user', JSON.stringify(res?.data?.data), { expires: 7 });
       messageApi.open({

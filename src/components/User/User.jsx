@@ -132,6 +132,9 @@ function User() {
       </Spin>
     </div>
   );
+  const closeDropdown = ()=> {
+      setIsUserOpen(false);
+  }
   const userData = (
     <div className="px-[20px] py-[30px]  rounded-[5px] shadow-xl bg-white ">
       <div className = 'flex flex-row items-center gap-2'>
@@ -143,8 +146,8 @@ function User() {
       </div>
       <Divider/>
       <div className = 'mt-4 flex flex-col gap-3'>
-        <Link to='/profile_settings' className = {`text-[16px] font-medium cursor-pointer hover:text-sky-500 ${location.pathname === '/profile_settings' ? 'text-sky-500' : ""}`}>Profile Setting</Link>
-        <Link to='/product-settings' className = {`text-[16px] font-medium cursor-pointer hover:text-sky-500 ${location.pathname === '/profile_settings' ? 'text-sky-500' : ""}`}>Profile Setting</Link>
+        <Link to='/user/profile_settings' onClick = {closeDropdown} className = {`text-[16px] font-medium cursor-pointer hover:text-sky-500 ${location.pathname === '/profile_settings' ? 'text-sky-500' : ""}`}>Profile Setting</Link>
+        <Link to='/user/product_settings' onClick = {closeDropdown} className = {`text-[16px] font-medium cursor-pointer hover:text-sky-500 ${location.pathname === '/profile_settings' ? 'text-sky-500' : ""}`}>Profile Setting</Link>
         <Button className = 'w-full' type = 'primary' onClick={handleLogout} icon={<LogoutIcon/> } iconPosition="start" >  Logout</Button>
       </div> 
     </div>

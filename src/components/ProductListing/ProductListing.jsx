@@ -18,10 +18,11 @@ function ProductListing() {
       dispatch(getProducts());
     }
   }, [dispatch, products.length]);
+  console.log(products,'Productslist')
   return (
     <div className=" w-full flex items-center justify-center  mt-[60px]">
       <div className="grid grid-cols-5 max-w-[1320px] w-full  gap-[16px]">
-        {products?.data?.products?.map((product) => {
+        {products?.products?.map((product) => {
           return (
             <Fragment key={product?.id}>
               <ProductCard

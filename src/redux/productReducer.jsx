@@ -10,7 +10,7 @@ export const getProducts = createAsyncThunk(
     }
     try {
       const response = await GET_PRODUCTS();
-      return response.data;
+      return response?.data?.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || "Something went wrong");
     }
