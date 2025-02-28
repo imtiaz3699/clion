@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import InputWithLabel from "../../components/InputWithLabel/InputWithLabel";
 import { useFormik } from "formik";
-import { Button, Select, Typography } from "antd";
+import { Button, Select, Spin, Typography } from "antd";
 import UploadProductImage from "../../components/UploadProductImage/UploadProductImage";
 import { useUserContext } from "../../context/userContext";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,12 +9,15 @@ import { getCategory } from "../../redux/categoryReducer";
 import { ADD_PRODUCT } from "../../api/productApi";
 import { MessageContext } from "../../context/messageContext";
 import { productSchema } from "../../utils/validationSchema";
+import { getProducts } from "../../redux/productReducer";
+import {  useNavigate } from "react-router";
 function ProductSettings() {
   const user = useUserContext();
   const messageApi = useContext(MessageContext);
   const dispatch = useDispatch();
   const category = useSelector((state) => state.categoryReducer);
   const [fileList, setFileList] = useState([]);
+  const navigate = useNavigate();
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -27,9 +30,9 @@ function ProductSettings() {
       user_id: user?.user?.id,
       product_category: "",
     },
-    validationSchema:productSchema,
-    onSubmit: async (values) => {
-      console.log(values, "ValuesToBeFine")
+    validationSchema: productSchema,
+    onSubmit: async (values,{resetForm}) => {
+      console.log(values, "ValuesToBeFine");
       const formData = new FormData();
       formData.append("product_name", values.product_name);
       formData.append("product_description", values.product_description);
@@ -43,21 +46,23 @@ function ProductSettings() {
           formData.append(`product_img`, file?.originFileObj);
         });
       }
-      console.log(values?.product_img[0],'faldjfhlads8978')
       try {
         const res = await ADD_PRODUCT(formData);
-        console.log("Product added successfully", res);
-        if(res?.data?.status === 200){
-          messageApi.open({type:"success",content:res?.data?.message})
+        console.log(res,'fasdfklasdfgsa')
+        if (res?.status === 200) {
+          messageApi.open({ type: "success", content: res?.data?.message });
+          dispatch(getProducts());
+          resetForm();
+          setFileList([])
+          navigate('/user/product_list',{replace:true})
         }
       } catch (error) {
-        console.error("Error adding product", error);
         messageApi.open({
-          type:"error",
-          content:error?.response?.data?.message,
-        })
+          type: "error",
+          content: error?.response?.data?.message,
+        });
       }
-    }
+    },
   });
   const handleChangeProductCondition = (values) => {
     formik.setFieldValue("product_condition", values);
@@ -78,9 +83,12 @@ function ProductSettings() {
       formik.setFieldValue("product_img", fileList);
     }
   }, [fileList]);
-  console.log(formik.errors,'formikerrorsdefined')
+  console.log(formik.errors, "formikerrorsdefined");
   return (
     <form className="flex flex-col w-full" onSubmit={formik.handleSubmit}>
+      <Spin spinning={formik.isSubmitting}>
+
+      
       <div className="flex flex-row items-start gap-[50px] mt-[30px]">
         <div className="w-full flex flex-col gap-[20px]">
           <p className="text-[20px] font-medium text-gray-600">
@@ -92,6 +100,7 @@ function ProductSettings() {
               value={formik?.values?.product_name}
               name="product_name"
               onChange={formik.handleChange}
+              error={formik.touched.product_name && formik.errors.product_name}
             />
             <InputWithLabel
               label="Product Description"
@@ -107,6 +116,7 @@ function ProductSettings() {
               name="quantity"
               type="number"
               onChange={formik.handleChange}
+              error={formik.touched.quantity && formik.errors.quantity}
             />
             <InputWithLabel
               label="price"
@@ -114,6 +124,7 @@ function ProductSettings() {
               name="price"
               type="number"
               onChange={formik.handleChange}
+              error={formik.touched.price && formik.errors.price}
             />
           </div>
           <div className="flex flex-row items-center gap-10">
@@ -133,11 +144,16 @@ function ProductSettings() {
                   { label: "New", value: "new" },
                   { label: "Old", value: "old" },
                 ]}
-                value={formik?.values?.product_condition}
+                value={ formik?.values?.product_condition}
               />
+              {
+                <p className="text-red-500 text-[12px] font-medium h-[10px]">
+                  {formik.touched.product_condition && formik.errors.product_condition}
+                </p>
+              }
             </div>
             <div className="w-full">
-              <Typography.Title level={5}>Product Condition</Typography.Title>
+              <Typography.Title level={5}>Category</Typography.Title>
               <Select
                 defaultValue={"Product Category"}
                 name="product_category"
@@ -151,6 +167,11 @@ function ProductSettings() {
                 options={category?.categoryList}
                 value={formik?.values?.product_category}
               />
+              {
+                <p className="text-red-500 text-[12px] font-medium h-[10px]">
+                  {formik.touched.product_category && formik.errors.product_category}
+                </p>
+              }
             </div>
           </div>
         </div>
@@ -161,8 +182,11 @@ function ProductSettings() {
           <UploadProductImage fileList={fileList} setFileList={setFileList} />
         </div>
       </div>
+      </Spin>
       <div className="flex items-center justify-end w-full">
-        <Button type="primary" htmlType="submit">Submit</Button>
+        <Button disabled={formik.isSubmitting} type="primary" htmlType="submit">
+          Submit
+        </Button>
       </div>
     </form>
   );

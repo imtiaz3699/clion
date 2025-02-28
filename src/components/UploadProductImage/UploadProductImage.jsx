@@ -41,11 +41,14 @@ const UploadProductImage = ({fileList,setFileList}) => {
   return (
     <>
       <Upload
-        action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+        // action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
         listType="picture-card"
         fileList={fileList}
         onPreview={handlePreview}
         onChange={handleChange}
+        beforeUpload={(files)=> {
+          return false;
+        }}
       >
         {fileList.length >= 8 ? null : uploadButton}
       </Upload>

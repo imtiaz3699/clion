@@ -7,10 +7,21 @@ const config = {
 };
 
 // /api/product/get-products
-export const GET_PRODUCTS = async (data) => {
+export const GET_PRODUCTS = async (page,limit,userId,productId) => {
+  const params = {
+    page: page,
+    limit: limit,
+    productId: productId,
+    userId: userId,
+  };
+  const cleanedParams = Object.fromEntries(
+    Object.entries(params).map(([key, value]) => [key, value ?? ''])
+  );
+  console.log(cleanedParams,page,limit,'cleanedPrams')
+  console.log(`/api/product/get-products?page=${page || ""}&limit=${limit || ""}&productId=${productId || ""}&userId=${userId || ""}`)
   try {
     const response = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}/api/product/get-products`,
+      `${import.meta.env.VITE_BASE_URL}/api/product/get-products`,{params:cleanedParams},
       config
     );
     console.log(response.data, "consoleData");

@@ -9,7 +9,7 @@ export const getProducts = createAsyncThunk(
       return rejectWithValue("Products already loaded");
     }
     try {
-      const response = await GET_PRODUCTS();
+      const response = await GET_PRODUCTS(productReducer.currentPage,productReducer.limit);
       return response?.data?.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || "Something went wrong");
@@ -22,8 +22,17 @@ const productReducer = createSlice({
     loading: false,
     products: [],
     error: null,
+    currentPage:1,
+    limit:10,
   },
-  reducers: {},
+  reducers: {
+    setCurrentPage:(state,action) => {
+      state.currentPage = action.payload;
+    },
+    setLimit:(state,action) => {
+      state.limit = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getProducts.pending, (state) => {
@@ -43,4 +52,5 @@ const productReducer = createSlice({
   },
 });
 
+export const {setCurrentPage,setLimit} = productReducer.actions;
 export default productReducer.reducer;

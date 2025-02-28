@@ -1,4 +1,5 @@
 import { Input, Typography } from "antd";
+import { ErrorMessage } from "formik";
 import React from "react";
 
 function InputWithLabel({ label, onChange, placeholder, value, password,name,error,forgotPassword,disabled,type }) {
@@ -40,11 +41,11 @@ function InputWithLabel({ label, onChange, placeholder, value, password,name,err
             disabled={disabled}
             type = {type}
           />
-          {error && (
-            <p className="text-red-500 text-[12px] font-medium">
+          {
+            <p className="text-red-500 text-[12px] font-medium h-[10px]">
               {error}
             </p>
-          )}
+          }
         </div>
       )}
     </>

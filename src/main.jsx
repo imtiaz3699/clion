@@ -28,6 +28,7 @@ import { ThemeProvider } from "./admin/adminContext/themeContext.jsx";
 import ProfileSettings from "./pages/userSettings/ProfileSettings.jsx";
 import ProductSettings from "./pages/userSettings/ProductSettings.jsx";
 import User from "./pages/userSettings/UserSettings.jsx";
+import ProductList from "./pages/userSettings/ProductList.jsx";
 
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
@@ -63,6 +64,7 @@ createRoot(document.getElementById("root")).render(
                       {/* Nested routes */}
                       <Route path="profile_settings" element={<ProfileSettings />} />
                       <Route path="product_settings" element={<ProductSettings />} />
+                      <Route path="product_list" element={<ProductList />} />
                     </Route>
                     
                   </Routes>
