@@ -29,6 +29,7 @@ import ProfileSettings from "./pages/userSettings/ProfileSettings.jsx";
 import ProductSettings from "./pages/userSettings/ProductSettings.jsx";
 import User from "./pages/userSettings/UserSettings.jsx";
 import ProductList from "./pages/userSettings/ProductList.jsx";
+import ProtectedLayout from "./utils/utils.jsx";
 
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
@@ -48,10 +49,6 @@ createRoot(document.getElementById("root")).render(
                       path="/product_listing"
                       element={<ProductListing />}
                     />
-                    {/* <Route
-                      path="/profile_settings"
-                      element={<ProfileSettings />}
-                    /> */}
                     <Route path="/wish_list" element={<WishList />} />
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/checkout" element={<Checkout />} />
@@ -60,13 +57,20 @@ createRoot(document.getElementById("root")).render(
                       <Route path="login" element={<Login />} />
                       <Route path="signup" element={<Signup />} />
                     </Route>
-                    <Route path="/user" element={<User />}>
-                      {/* Nested routes */}
-                      <Route path="profile_settings" element={<ProfileSettings />} />
-                      <Route path="product_settings" element={<ProductSettings />} />
-                      <Route path="product_list" element={<ProductList />} />
-                    </Route>
                     
+                    <Route element={<ProtectedLayout />}>
+                      <Route path="/user" element={<User />}>
+                        <Route
+                          path="profile_settings"
+                          element={<ProfileSettings />}
+                        />
+                        <Route
+                          path="product_settings"
+                          element={<ProductSettings />}
+                        />
+                        <Route path="product_list" element={<ProductList />} />
+                      </Route>
+                    </Route>
                   </Routes>
                   <Footer />
                 </ConfigProvider>

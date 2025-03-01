@@ -23,7 +23,7 @@ const productReducer = createSlice({
     products: [],
     error: null,
     currentPage:1,
-    limit:10,
+    limit:100,
   },
   reducers: {
     setCurrentPage:(state,action) => {

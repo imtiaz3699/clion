@@ -9,7 +9,7 @@ import * as Yup from "yup";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
 function Login() {
-  const { setUser, setToken, loginUserMutation } = useUserContext();
+  const { setUser, setToken, loginUserMutation,setIsAuthenticated } = useUserContext();
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -29,10 +29,11 @@ function Login() {
             Cookies.set("token", JSON.stringify(data?.data?.data?.token), {
               expires: 7,
             });
+            setIsAuthenticated(true);
             setUser(data?.data?.data?.data);
             setToken(data?.data?.data?.token);
             Cookies.set("user", JSON.stringify(data?.data?.data?.data), {
-              expires: 7,
+            expires: 7,
             });
             actions.resetForm();
             actions.setSubmitting(false);

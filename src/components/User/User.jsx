@@ -22,7 +22,7 @@ function User() {
   console.log(location.pathname)
   const [isOpen, setIsOpen] = useState(false);
   const [isUserOpen,setIsUserOpen] = useState(false);
-  const { setUser, setToken, token, user, createUserMutation,handleLogout,loginUserMutation } =
+  const { setUser, setToken, user, handleLogout,loginUserMutation } =
     useUserContext();
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -41,15 +41,15 @@ function User() {
       loginUserMutation.mutate(values, {
         onSuccess: (data) => {
           if (data?.status === 200) {
-            console.log("User created successfully:", data);
+            console.log("User loggedin successfully.", data);
             Cookies.set("token", JSON.stringify(data?.data?.data?.token), {
               expires: 7,
             });
-            setUser(data?.data?.data?.data);
             setToken(data?.data?.data?.token);
             Cookies.set("user", JSON.stringify(data?.data?.data?.data), {
               expires: 7,
             });
+            setUser(data?.data?.data?.data);
             actions.resetForm();
             toggleDropdown();
             actions.setSubmitting(false);
@@ -146,12 +146,14 @@ function User() {
       </div>
       <Divider/>
       <div className = 'mt-4 flex flex-col gap-3'>
-        <Link to='/user/profile_settings' onClick = {closeDropdown} className = {`text-[16px] font-medium cursor-pointer hover:text-sky-500 ${location.pathname === '/profile_settings' ? 'text-sky-500' : ""}`}>Profile Setting</Link>
-        <Link to='/user/product_settings' onClick = {closeDropdown} className = {`text-[16px] font-medium cursor-pointer hover:text-sky-500 ${location.pathname === '/profile_settings' ? 'text-sky-500' : ""}`}>Profile Setting</Link>
+        <Link to='/user/profile_settings' onClick = {closeDropdown} className = {`text-[16px] font-medium cursor-pointer hover:text-sky-500 ${location.pathname === '/user/profile_settings' ? 'text-sky-500' : ""}`}>Profile Setting</Link>
+        <Link to='/user/product_settings' onClick = {closeDropdown} className = {`text-[16px] font-medium cursor-pointer hover:text-sky-500 ${location.pathname === '/user/product_settings' ? 'text-sky-500' : ""}`}>Product Setting</Link>
+        <Link to='/user/product_list' onClick = {closeDropdown} className = {`text-[16px] font-medium cursor-pointer hover:text-sky-500 ${location.pathname === '/user/product_list' ? 'text-sky-500' : ""}`}>Product List</Link>
         <Button className = 'w-full' type = 'primary' onClick={handleLogout} icon={<LogoutIcon/> } iconPosition="start" >  Logout</Button>
       </div> 
     </div>
   )
+  console.log(user,'fasdlfjkshdalfkjsda')
   return (
     <>
       {user?.firstName ? (

@@ -18,22 +18,22 @@ function MainNav() {
     {
       url: "",
       name: "Track Order",
-      img: <SlLocationPin className = 'text-[16px]' />,
+      img: <SlLocationPin className="text-[16px]" />,
     },
     {
       url: "",
       name: "Compare",
-      img: <IoIosGitCompare/>,
+      img: <IoIosGitCompare />,
     },
     {
       url: "",
       name: "Customer Support",
-      img: <PiHeadphonesBold className = 'text-[16px]'/>,
+      img: <PiHeadphonesBold className="text-[16px]" />,
     },
     {
       url: "",
       name: "Need Help",
-      img: <BsExclamationDiamond className = 'text-[16px]'/>,
+      img: <BsExclamationDiamond className="text-[16px]" />,
     },
   ];
 
@@ -45,7 +45,7 @@ function MainNav() {
           <NavSearch />
           <div className="flex flex-row items-center gap-[24px]">
             <Cart />
-            
+
             <User />
           </div>
         </div>
@@ -57,16 +57,23 @@ function MainNav() {
             <div className="flex flex-row items-center gap-6">
               {menu?.map((element, idx) => {
                 return (
-                  <div className="flex flex-row items-center gap-[6px] cursor-pointer group font-medium" key = {idx}>
-                    <div className = 'text-gray-900 group-hover:text-[#FA8232] delay-300 transition-opacity'>{element?.img}</div>
-                    <p className = 'text-gray-500 text-[16px] group-hover:text-[#FA8232] delay-300 transition-opacity'>{element?.name}</p>
+                  <div
+                    className="flex flex-row items-center gap-[6px] cursor-pointer group font-medium"
+                    key={idx}
+                  >
+                    <div className="text-gray-900 group-hover:text-[#FA8232] delay-300 transition-opacity">
+                      {element?.img}
+                    </div>
+                    <p className="text-gray-500 text-[16px] group-hover:text-[#FA8232] delay-300 transition-opacity">
+                      {element?.name}
+                    </p>
                   </div>
                 );
               })}
             </div>
           </div>
-          <tel  className = 'flex flex-row items-center gap-3 font-medium text-gray-900'>
-          <FiPhoneCall className = 'text-gray-900'/> +1-202-555-0104
+          <tel className="flex flex-row items-center gap-3 font-medium text-gray-900">
+            <FiPhoneCall className="text-gray-900" /> +1-202-555-0104
           </tel>
         </div>
       </div>
