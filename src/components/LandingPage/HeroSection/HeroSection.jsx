@@ -18,10 +18,17 @@ function HeroSection() {
     "https://swiperjs.com/demos/images/nature-4.jpg",
   ];
   const banner = useQuery({ queryKey: ["banner"], queryFn: getBanner });
-  console.log(banner?.data?.data?.data,'banner')
+  console.log(banner?.data?.data?.data[0]?.product, "bannerBnaed");
+  let img = [];
+  const imagesss = banner?.data?.data?.data?.forEach((element) =>
+    element?.product?.map((item) =>
+      item.product_img?.map((prIgm) => img.push(prIgm))
+    )
+  );
+  console.log(img, "imageflajsdhfkjad");
   return (
     <div className="flex items-center justify-center w-full">
-      <div className="max-w-[1320px] w-full">
+      <div className=" w-full">
         <Swiper
           spaceBetween={30}
           effect={"fade"}
@@ -30,10 +37,11 @@ function HeroSection() {
           modules={[EffectFade, Navigation, Pagination]}
           className="mySwiper"
         >
-          {banner?.data?.data?.data[0]?.product?.map((src, index) => (
+          {img?.map((src, index) => (
             <SwiperSlide key={index}>
-              <div className="relative w-full h-[500px] flex justify-center">
-                <img src={src?.product_img[0]} className="w-full h-full object-cover" />
+              {console.log(src, "SRC ConTRoller")}
+              <div className="relative w-full h-[700px] flex justify-center">
+                <img src={src} className="w-full h-full object-cover" />
               </div>
             </SwiperSlide>
           ))}

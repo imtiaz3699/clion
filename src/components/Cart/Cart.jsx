@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { BsCartCheckFill } from "react-icons/bs";
 import { BsCart2 } from "react-icons/bs";
@@ -7,11 +7,14 @@ import { Dropdown, Button, List, Divider } from "antd";
 import { ShoppingCartOutlined, CloseOutlined } from "@ant-design/icons";
 import { useUser } from "../../context/context";
 import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { getCart } from "../../redux/cartReducer";
 function Cart() {
   const navigate = useNavigate();
+  const cart = useSelector((state)=> state.cart)
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const {jsonProducts} = useUser();
-  console.log(jsonProducts?.data?.products[5]?.images[0],'JsonProductsFinally')
   const cartItems = [
     {
       id: 1,
@@ -86,6 +89,12 @@ function Cart() {
       </div>
     </div>
   );
+  useEffect(()=> {
+    if(cart?.items?.length === 0) {
+      dispatch(getCart(1,1000));
+    }
+  },[cart])
+  console.log(cart?.items?.length,'fadslfjskda')
   return (
     <div className="flex flex-row items-center gap-[24px]">
       <LuHeart className="text-white text-[20px] hover:text-gray-400 delay-75 cursor-pointer" />

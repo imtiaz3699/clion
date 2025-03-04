@@ -15,7 +15,6 @@ function ProductCard({
   const cartItems = useSelector((state) => state.cart.items);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   const dispatch = useDispatch();
-
   return (
     <div className="w-full max-w-[248px] hover:shadow-xl h-full min-h-[296px] p-3 relative border-[1px] border-gray-200">
       <div

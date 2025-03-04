@@ -9,8 +9,12 @@ import { useNavigate } from "react-router";
 export const UserContextAuth = createContext();
 export const UserProviderAuth = ({ children }) => {
   const messageApi = useContext(MessageContext);
-  const [user, setUser] = useState(Cookies.get("user") ? JSON.parse(Cookies.get("user")) : null);
-  const [token, setToken] = useState(Cookies.get("token") ? JSON.parse(Cookies.get("token")) : null);
+  const [user, setUser] = useState(
+    Cookies.get("user") ? JSON.parse(Cookies.get("user")) : null
+  );
+  const [token, setToken] = useState(
+    Cookies.get("token") ? JSON.parse(Cookies.get("token")) : null
+  );
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   useEffect(() => {
     const userData = Cookies.get("user");
@@ -22,21 +26,12 @@ export const UserProviderAuth = ({ children }) => {
       setUser(JSON.parse(userData));
     }
   }, [Cookies.get("user"), Cookies.get("token")]);
-
-  console.log(token,user,'fasd;fjashdlk')
   const logout = () => {
-    Cookies.remove("user",{},{expires:-1,path:"/"});
+    Cookies.remove("user", {}, { expires: -1, path: "/" });
     Cookies.set("token", "", { expires: -1, path: "/" });
     setUser(null);
     setToken(null);
   };
-  console.log(token,Cookies.get('token'),'fasdlfjhasldfjkhasldkjfhasldkjf')
-  const isTokenExpired = (token) => {
-    if (!token) return false;
-    const decodedToken = jwtDecode(token);
-    return decodedToken.exp * 1000 < Date.now();
-  };
-
   const loginUserMutation = useMutation(loginUser, {});
   const createUserMutation = useMutation(addUser, {});
   const updateUserMutation = useMutation(

@@ -29,7 +29,7 @@ import ProfileSettings from "./pages/userSettings/ProfileSettings.jsx";
 import ProductSettings from "./pages/userSettings/ProductSettings.jsx";
 import User from "./pages/userSettings/UserSettings.jsx";
 import ProductList from "./pages/userSettings/ProductList.jsx";
-import ProtectedLayout from "./utils/utils.jsx";
+import ProtectedLayout, { AuthRoutes } from "./utils/utils.jsx";
 
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
@@ -52,12 +52,14 @@ createRoot(document.getElementById("root")).render(
                     <Route path="/wish_list" element={<WishList />} />
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/checkout" element={<Checkout />} />
-                    <Route path="/auth" element={<AuthTabs />}>
-                      {/* Nested routes */}
-                      <Route path="login" element={<Login />} />
-                      <Route path="signup" element={<Signup />} />
+                    <Route element={<AuthRoutes />}>
+                      <Route path="/auth" element={<AuthTabs />}>
+                        {/* Nested routes */}
+                        <Route path="login" element={<Login />} />
+                        <Route path="signup" element={<Signup />} />
+                      </Route>
                     </Route>
-                    
+
                     <Route element={<ProtectedLayout />}>
                       <Route path="/user" element={<User />}>
                         <Route

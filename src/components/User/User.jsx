@@ -19,7 +19,6 @@ import { useLocation } from "react-router";
 function User() {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.pathname)
   const [isOpen, setIsOpen] = useState(false);
   const [isUserOpen,setIsUserOpen] = useState(false);
   const { setUser, setToken, user, handleLogout,loginUserMutation } =
@@ -41,7 +40,6 @@ function User() {
       loginUserMutation.mutate(values, {
         onSuccess: (data) => {
           if (data?.status === 200) {
-            console.log("User loggedin successfully.", data);
             Cookies.set("token", JSON.stringify(data?.data?.data?.token), {
               expires: 7,
             });

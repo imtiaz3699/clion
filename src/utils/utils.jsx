@@ -2,9 +2,8 @@ import { Outlet, Navigate } from "react-router";
 import { useUserContext } from "../context/userContext";
 
 const ProtectedLayout = () => {
-  const { isAuthenticated, token } = useUserContext();
+  const { token } = useUserContext();
   const checkToken = token ?? "";
-  console.log(token,'fasldjfhasldjfhlasdjfhlksda')
   if (!checkToken) {
     return <Navigate to="/auth/login" />;
   }
@@ -12,3 +11,11 @@ const ProtectedLayout = () => {
 };
 
 export default ProtectedLayout;
+
+export const AuthRoutes = () => {
+  const { token } = useUserContext();
+  if (token) {
+    return <Navigate to="/" />;
+  }
+  return <Outlet />;
+};

@@ -13,7 +13,7 @@ import MainNav from "./MainNav/MainNav";
 function Navbar() {
   return (
     <>
-      <div className="bg-gray-900 h-[80px] flex items-center justify-center w-full relative">
+      {/* <div className="bg-gray-900 h-[80px] flex items-center justify-center w-full relative">
         <div className="max-w-[1320px] w-full flex flex-row items-center justify-between  text-white ">
           <div className="flex flex-row items-center gap-[12px]">
             <span className="bg-[#EBC80C] text-[16px] w-[70px] h-[40px] text-black font-medium flex items-center justify-center -rotate-3 ">
@@ -37,7 +37,7 @@ function Navbar() {
         <div className="bg-[#303639] w-[32px] h-[32px] rounded-[2px] flex items-center justify-center absolute right-4">
           <IoCloseSharp className="text-[#FFFFFF]" />
         </div>
-      </div>
+      </div> */}
       <MainNav />
     </>
   );
