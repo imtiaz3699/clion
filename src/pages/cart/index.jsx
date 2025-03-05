@@ -3,13 +3,16 @@ import ShoppingCard from "../../components/ShoppingCard/ShoppingCard";
 import { Button, Divider } from "antd";
 import { RightArrowIcon } from "../../components/Icons/Icons";
 import CouponCode from "../../components/CouponCode/CouponCode";
+import { useSelector } from "react-redux";
 
 function Cart() {
+  const cart = useSelector((state)=> state.cart);
+  console.log(cart?.items,'faldsfalsdhjfasdfasd')
   return (
     <div className="w-full flex items-center justify-center mt-[72px]">
       <div className="max-w-[1320px] w-full flex flex-row items-start gap-[24px]">
         <div className="max-w-[872px] w-full ">
-          <ShoppingCard />
+          <ShoppingCard data = {cart?.items} />
         </div>
         <div className="max-w-[424px] w-full flex flex-col gap-6">
           <div className="max-w-[424px] w-full px-6 py-5 border-[1px] border-gray-300 flex flex-col gap-[20px]">

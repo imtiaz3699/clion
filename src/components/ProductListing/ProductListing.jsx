@@ -14,7 +14,7 @@ function ProductListing() {
     }
   };
   useEffect(() => {
-    if (products.length === 0) {
+    if (products?.length === 0) {
       dispatch(getProducts(1,1000,"",19));
     }
   }, [dispatch, products.length]);

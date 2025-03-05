@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-const token = JSON.parse(Cookies.get("token"));
+const token = Cookies.get('token') ? JSON.parse(Cookies.get("token")) : "";
 console.log(token, "IamToken");
 const config = {
   headers: { Authorization: `Bearer ${token}` },
