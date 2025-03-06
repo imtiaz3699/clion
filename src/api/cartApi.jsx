@@ -26,7 +26,7 @@ export const GET_CART = async (page, limit, userId, productId) => {
     throw error;
   }
 };
-export const ADD_PRODUCT = async (data) => {
+export const ADD_TO_CART = async (data) => {
   try {
     const response = await axios.post(
       `${import.meta.env.VITE_BASE_URL}/api/product/create-product`,
@@ -39,10 +39,11 @@ export const ADD_PRODUCT = async (data) => {
     throw error;
   }
 };
-export const DELETE_PRODUCT = async (id, data) => {
+export const REMOVE_FROM_CART = async (id, data) => {
   try {
-    const response = await axios.delete(
-      `${import.meta.env.VITE_BASE_URL}/api/product/delete-products/${id}`,
+    const response = await axios.put(
+      `${import.meta.env.VITE_BASE_URL}/user/cart/update-cart/${id}`,
+      data,
       config
     );
     return response;

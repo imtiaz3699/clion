@@ -15,22 +15,6 @@ function Cart() {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const { jsonProducts } = useUser();
-  // const cartItems = [
-  //   {
-  //     id: 1,
-  //     name: jsonProducts?.data?.products[5]?.title,
-  //     price: 1500,
-  //     quantity: 1,
-  //     image: jsonProducts?.data?.products[5]?.images[0], // Replace with real image URL
-  //   },
-  //   {
-  //     id: 2,
-  //     name: jsonProducts?.data?.products[5]?.title,
-  //     price: 269,
-  //     quantity: 2,
-  //     image: jsonProducts?.data?.products[5]?.images[0], // Replace with real image URL
-  //   },
-  // ];
   const cartItems =
     cart?.items?.length > 0
       ? cart?.items?.slice(0, 3)?.map((element, idx) => ({

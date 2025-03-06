@@ -54,12 +54,12 @@ const cartSlice = createSlice({
       const { id, quantity } = action.payload;
       const product = state.items.find((item) => item.id === id);
       if (product) {
-        product.quantity = quantity;
+        product.quantity = product?.product?.quantity <= quantity ? product?.product?.quantity :  quantity;
         product.sub_total = product.price * quantity; // Update sub-total
       }
-      // Recalculate total amount
       state.totalAmount = state.items.reduce((total, item) => total + item.price * item.quantity, 0);
     },
+
   },
   extraReducers: (builder) => {
     builder
@@ -74,7 +74,6 @@ const cartSlice = createSlice({
         state.items = action.payload?.products || []; // Ensure items are stored properly
       })
       .addCase(getCart.rejected, (state, action) => {
-        
         console.log("API Error:", action.payload); // Debugging Log
         state.status = "failed";
         state.error = action.payload;

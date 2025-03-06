@@ -1,20 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { CloseIcon, MinusIcon, PlusIcon } from "../Icons/Icons";
 import { useUserContext } from "../../context/userContext";
+import { useDispatch } from "react-redux";
+import { updateItemQuantity } from "../../redux/cartReducer";
+import { REMOVE_FROM_CART } from "../../api/cartApi";
 
 function ShoppingCard({ data }) {
   const { user } = useUserContext();
-  const handleUpdateProductCart = async (values) => {
-    console.log(values, "fadlfjka134");
-    // cartId:values?.key,
+  const dispatch = useDispatch();
+  const handleQuantityChange = async (value, decrement) => {
+    const quantity = decrement
+      ? value?.quantity === 0
+        ? value?.quantity
+        : value?.quantity - 1
+      : value?.quantity + 1;
     const payload = {
-      userId: user?.id,
-      productId:values?.productId,
-      quantity:values?.quantity
+      userId: user.id,
+      productId: value?.productId,
+      quantity: quantity,
     };
-    
-    console.log(payload,'Payload')
+    if (decrement) {
+      dispatch(
+        updateItemQuantity({
+          id: value?.key,
+          quantity: quantity,
+        })
+      );
+      const res = await REMOVE_FROM_CART(value?.key, payload);
+      console.log(res, decrement, "ResponsibleForNexGEne");
+    } else {
+      dispatch(
+        updateItemQuantity({
+          id: value?.key,
+          quantity: quantity,
+        })
+      );
+      const res = await REMOVE_FROM_CART(value?.key, payload);
+      console.log(res, "ResponsibleForNexGEne");
+    }
   };
   const columns = [
     {
@@ -45,12 +69,15 @@ function ShoppingCard({ data }) {
       render: (_, text) => (
         <div className="flex flex-row items-center gap-[5px]">
           <div className="max-w-[164px] w-full flex flex-row items-center h-[56px] justify-between p-4 border-[1px] border-gray-300 rounded-[5px]">
-            <MinusIcon onClick={() => handleUpdateProductCart(text)} />
+            <div onClick={() => handleQuantityChange(text, true)}>
+              <MinusIcon className="cursor-pointer" />
+            </div>
             <input
-              value={text?.quantity}
+              value={text?.quantity ?? 0}
               className="w-full text-center outline-none"
+              onChange={() => handleQuantityChange(text)}
             />
-            <div onClick={() => handleUpdateProductCart(text)}>
+            <div onClick={() => handleQuantityChange(text)}>
               <PlusIcon className="cursor-pointer" />
             </div>
           </div>
@@ -73,7 +100,7 @@ function ShoppingCard({ data }) {
     sub_total: element?.quantity * element?.product?.price,
     productId: element?.product?.id,
   }));
-  console.log(data, "afdlfjkhasdlkjh");
+  console.log(data, "fasd;fahsldfks");
   return (
     <div className="border-[1px] border-gray-200  py-[20px] flex flex-col gap-[20px]">
       <p className="font-bold text-[18px] text-gray-700 px-6 ">Shopping Card</p>
