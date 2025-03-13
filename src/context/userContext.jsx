@@ -28,7 +28,7 @@ export const UserProviderAuth = ({ children }) => {
   }, [Cookies.get("user"), Cookies.get("token")]);
   const logout = () => {
     Cookies.remove("user", {}, { expires: -1, path: "/" });
-    Cookies.set("token", "", { expires: -1, path: "/" });
+    Cookies.remove("token", { expires: -1, path: "/" });
     setUser(null);
     setToken(null);
   };
@@ -49,7 +49,8 @@ export const UserProviderAuth = ({ children }) => {
     }
   );
   const handleLogout = () => {
-    Cookies.remove("user");
+    Cookies.remove("user",{path:"/"});
+    Cookies.remove("token",{path:"/"})
     setUser(null);
     setToken(null);
   };
@@ -58,7 +59,6 @@ export const UserProviderAuth = ({ children }) => {
       value={{
         setUser,
         user,
-        logout,
         token,
         setToken,
         loginUserMutation,

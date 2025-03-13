@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-const token = Cookies.get('token') ? JSON.parse(Cookies.get("token")) : "";
+const token = Cookies.get("token") ? JSON.parse(Cookies.get("token")) : "";
 console.log(token, "IamTokenfasdfasdfasdfasdfasdfas");
 const config = {
   headers: { Authorization: `Bearer ${token}` },
@@ -39,12 +39,28 @@ export const ADD_TO_CART = async (data) => {
     throw error;
   }
 };
-export const REMOVE_FROM_CART = async (id, data) => {
+export const UPDATE_CART = async (id, data) => {
   try {
     const response = await axios.put(
       `${import.meta.env.VITE_BASE_URL}/user/cart/update-cart/${id}`,
       data,
       config
+    );
+    return response;
+  } catch (error) {
+    console.error("API Error:", error);
+    throw error;
+  }
+};
+export const REMOVE_FROM_CART = async (id) => {
+  try {
+    const response = await axios.delete(
+      `${import.meta.env.VITE_BASE_URL}/user/cart/remove-from-cart/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     return response;
   } catch (error) {

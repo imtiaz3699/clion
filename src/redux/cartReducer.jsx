@@ -42,7 +42,7 @@ const cartSlice = createSlice({
     removeItem: (state, action) => {
       const index = state.items.findIndex((item) => item.id === action.payload);
       if (index >= 0) {
-        state.totalAmount -= state.items[index].price * state.items[index].quantity;
+        state.totalAmount -= state.items[index].product.price * state.items[index].quantity;
         state.items.splice(index, 1);
       }
     },
@@ -55,26 +55,23 @@ const cartSlice = createSlice({
       const product = state.items.find((item) => item.id === id);
       if (product) {
         product.quantity = product?.product?.quantity <= quantity ? product?.product?.quantity :  quantity;
-        product.sub_total = product.price * quantity; // Update sub-total
+        product.sub_total = product?.product?.price * quantity; // Update sub-total
       }
-      state.totalAmount = state.items.reduce((total, item) => total + item.price * item.quantity, 0);
+      state.totalAmount = state.items.reduce((total, item) => total + item.product.price * item.quantity, 0);
     },
-
   },
   extraReducers: (builder) => {
     builder
       .addCase(getCart.pending, (state) => {
-        console.log(state,'fasdlfkhasldkjfhlskdjfhlaskdj')
         state.status = "loading";
       })
       .addCase(getCart.fulfilled, (state, action) => {
-        console.log("API Response Data:", action.payload); // Debugging Log
         state.status = "succeeded";
         state.totalAmount = action.payload.totalAmount
-        state.items = action.payload?.products || []; // Ensure items are stored properly
+        state.items = action.payload?.products || [];
       })
       .addCase(getCart.rejected, (state, action) => {
-        console.log("API Error:", action.payload); // Debugging Log
+        console.log("API Error:", action.payload);
         state.status = "failed";
         state.error = action.payload;
       });

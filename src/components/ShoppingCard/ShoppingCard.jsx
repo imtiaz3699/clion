@@ -1,14 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Table } from "antd";
 import { CloseIcon, MinusIcon, PlusIcon } from "../Icons/Icons";
 import { useUserContext } from "../../context/userContext";
-import { useDispatch } from "react-redux";
-import { updateItemQuantity } from "../../redux/cartReducer";
-import { REMOVE_FROM_CART } from "../../api/cartApi";
+import { useDispatch, useSelector } from "react-redux";
+import { removeItem, updateItemQuantity } from "../../redux/cartReducer";
+import { REMOVE_FROM_CART, UPDATE_CART } from "../../api/cartApi";
+import { useMutation } from "@tanstack/react-query";
 
 function ShoppingCard({ data }) {
   const { user } = useUserContext();
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  const removeProductMutation = useMutation((id) => REMOVE_FROM_CART(id), {
+    onSuccess: async (data, variables) => {
+      if (data?.status === 200) {
+        dispatch(removeItem(variables));
+      }
+    },
+  });
   const handleQuantityChange = async (value, decrement) => {
     const quantity = decrement
       ? value?.quantity === 0
@@ -27,7 +36,7 @@ function ShoppingCard({ data }) {
           quantity: quantity,
         })
       );
-      const res = await REMOVE_FROM_CART(value?.key, payload);
+      const res = await UPDATE_CART(value?.key, payload);
       console.log(res, decrement, "ResponsibleForNexGEne");
     } else {
       dispatch(
@@ -36,8 +45,7 @@ function ShoppingCard({ data }) {
           quantity: quantity,
         })
       );
-      const res = await REMOVE_FROM_CART(value?.key, payload);
-      console.log(res, "ResponsibleForNexGEne");
+      const res = await UPDATE_CART(value?.key, payload);
     }
   };
   const columns = [
@@ -45,13 +53,13 @@ function ShoppingCard({ data }) {
       title: "Product",
       dataIndex: "name",
       key: "name",
-      width: "25%", // Equal width
-      render: (text) => (
+      width: "25%",
+      render: (_, text) => (
         <div className="flex flex-row items-center gap-[5px]">
-          <button>
+          <button onClick={() => removeProductMutation.mutate(text?.key)}>
             <CloseIcon className="text-[20px] text-[#929FA5]" />
           </button>
-          <div className="flex flex-row items-center gap-2">{text} </div>
+          <div className="flex flex-row items-center gap-2">{text?.name} </div>
         </div>
       ),
     },
@@ -59,7 +67,7 @@ function ShoppingCard({ data }) {
       title: "Price",
       dataIndex: "price",
       key: "price",
-      width: "25%", // Equal width
+      width: "25%",
     },
     {
       title: "Quantity",
@@ -100,11 +108,15 @@ function ShoppingCard({ data }) {
     sub_total: element?.quantity * element?.product?.price,
     productId: element?.product?.id,
   }));
-  console.log(data, "fasd;fahsldfks");
   return (
     <div className="border-[1px] border-gray-200  py-[20px] flex flex-col gap-[20px]">
-      <p className="font-bold text-[18px] text-gray-700 px-6 ">Shopping Card</p>
-      <Table columns={columns} dataSource={datas} pagination={false} />
+      <p className="font-bold text-[18px] text-gray-700 px-6 ">Shopping Cart</p>
+      <Table
+        loading={removeProductMutation?.isLoading}
+        columns={columns}
+        dataSource={datas}
+        pagination={false}
+      />
     </div>
   );
 }

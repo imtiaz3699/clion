@@ -8,13 +8,26 @@ import { ShoppingCartOutlined, CloseOutlined } from "@ant-design/icons";
 import { useUser } from "../../context/context";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { getCart } from "../../redux/cartReducer";
+import { getCart, removeItem } from "../../redux/cartReducer";
+import { REMOVE_FROM_CART } from "../../api/cartApi";
+import { removeListener } from "@reduxjs/toolkit";
 function Cart() {
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const { jsonProducts } = useUser();
+  const handleRemoveFromCart = async (id) => {
+    try {
+      const res = await REMOVE_FROM_CART(id);
+      if (res?.status === 200) {
+        dispatch(removeItem(id));
+        console.log(res,'fasdfsda')
+      }
+    } catch (error) {
+        console.log(error,);
+    }
+  };
   const cartItems =
     cart?.items?.length > 0
       ? cart?.items?.slice(0, 3)?.map((element, idx) => ({
@@ -48,7 +61,7 @@ function Cart() {
                 <Button
                   type="text"
                   icon={<CloseOutlined className="text-gray-[#929FA5]" />}
-                  onClick={() => console.log("Remove item:", item.id)}
+                  onClick={() => handleRemoveFromCart(item?.id)}
                 />,
               ]}
             >
@@ -92,6 +105,7 @@ function Cart() {
           </span>
         </div>
         <Button
+        onClick={() => {navigate("/checkout");setIsOpen(false)}}
           type="primary"
           className="!h-[48px]"
           block
@@ -100,7 +114,7 @@ function Cart() {
           CHECKOUT NOW →
         </Button>
         <Button
-          onClick={() => navigate("/cart")}
+          onClick={() => {navigate("/cart");setIsOpen(false)}}
           type="default"
           block
           className="!h-[48px] border-[1x] border-[#FA8232] text-[#FA8232]"
@@ -110,6 +124,7 @@ function Cart() {
       </div>
     </div>
   );
+
   useEffect(() => {
     if (cart?.items?.length === 0) {
       dispatch(getCart(1, 10));
