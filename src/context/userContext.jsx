@@ -3,24 +3,22 @@ import Cookies from "js-cookie";
 import { loginUser, addUser, updateUser, getProfile } from "../api/authApi";
 import { useMutation } from "@tanstack/react-query";
 import { MessageContext } from "./messageContext";
-import { jwtDecode } from "jwt-decode";
-import { useNavigate } from "react-router";
-// Create the context
 export const UserContextAuth = createContext();
 export const UserProviderAuth = ({ children }) => {
   const messageApi = useContext(MessageContext);
+  
   const [user, setUser] = useState(
     Cookies.get("user") ? JSON.parse(Cookies.get("user")) : null
   );
   const [token, setToken] = useState(
-    Cookies.get("token") ? JSON.parse(Cookies.get("token")) : null
+    Cookies.get("token") ? Cookies.get("token") : null
   );
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   useEffect(() => {
     const userData = Cookies.get("user");
     const userToken = Cookies.get("token");
     if (userToken) {
-      setToken(JSON.parse(userToken));
+      setToken(userToken);
     }
     if (userData) {
       setUser(JSON.parse(userData));

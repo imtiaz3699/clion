@@ -18,7 +18,7 @@ function App() {
     <HeroSection/>
     {/* <OurCommitments/> */}
     {/* <BestDeals/> */}
-    {/* <Categories/> */}
+    <Categories/>
     {/* <FeaturedProducts/> */}
     <ProductListing/>    
     {/* <SaleeProduct/> */}

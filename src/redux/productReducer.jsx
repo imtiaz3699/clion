@@ -5,9 +5,9 @@ export const getProducts = createAsyncThunk(
   "product/getProducts",
   async (_, { getState, rejectWithValue }) => {
     const { productReducer } = getState();
-    if (productReducer.products.length > 0) {
-      return rejectWithValue("Products already loaded");
-    }
+    // if (productReducer.products.length > 0) {
+    //   return rejectWithValue("Products already loaded");
+    // }
     try {
       const response = await GET_PRODUCTS(productReducer.currentPage,productReducer.limit);
       return response?.data?.data;
@@ -23,7 +23,8 @@ const productReducer = createSlice({
     products: [],
     error: null,
     currentPage:1,
-    limit:100,
+    limit:10,
+    pagination:{},
   },
   reducers: {
     setCurrentPage:(state,action) => {
@@ -31,6 +32,9 @@ const productReducer = createSlice({
     },
     setLimit:(state,action) => {
       state.limit = action.payload;
+    },
+    setPagination:(state,action) => {
+      state.pagination = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -40,8 +44,14 @@ const productReducer = createSlice({
         state.error = null;
       })
       .addCase(getProducts.fulfilled, (state, action) => {
+       
         state.loading = false;
-        state.products = action.payload;
+        state.pagination = action.payload.pagination 
+        console.log()
+        const newProducts = action.payload.products;
+        const existingProducts = new Set(state.products.map(p=> p.id))
+        const filteredProducts = newProducts.filter(p=> !existingProducts.has(p.id));
+        state.products = [...state.products,...filteredProducts];
       })
       .addCase(getProducts.rejected, (state, action) => {
         state.loading = false;

@@ -6,7 +6,7 @@ import { IoIosClose } from "react-icons/io";
 
 const { useToken } = theme;
 
-function ListingFilter() {
+function ListingFilter({search,setSearch}) {
   const items = [
     {
       key: "1",
@@ -61,11 +61,13 @@ function ListingFilter() {
     <div className="flex flex-col gap-[16px] w-full">
       <div className="flex flex-row items-center justify-between">
         <Input.Search
-          placeholder="Search"
+          placeholder="Search product name....."
           className="w-full max-w-[424px] !h-[59px] !outline-none !border-gray-300"
           style={{ outline: "none" }}
+          value = {search}
+          onChange={(e)=> setSearch(e.target.value)}
         />
-        <div className="text-gray-600 font-medium text-[16px] flex flex-row items-center gap-[20px]">
+        {/* <div className="text-gray-600 font-medium text-[16px] flex flex-row items-center gap-[20px]">
           {" "}
           <p> Sort By</p>
           <Dropdown
@@ -100,9 +102,9 @@ function ListingFilter() {
               </Space>
             </a>
           </Dropdown>
-        </div>
+        </div> */}
       </div>
-      <div className="flex flex-row items-center justify-between w-full h-[44px] bg-[#F2F4F5] px-[24px] font-medium">
+      {/* <div className="flex flex-row items-center justify-between w-full h-[44px] bg-[#F2F4F5] px-[24px] font-medium">
         <div className="flex flex-row items-center gap-[16px] text-gray-400 ">
           <p>Active Filters:</p>
           <div className="flex items-center gap-[6px] text-gray-500">
@@ -115,7 +117,7 @@ function ListingFilter() {
           <p className="text-gray-900">65,867</p>
           <p className="text-gray-700">Results Found.</p>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

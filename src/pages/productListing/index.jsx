@@ -12,7 +12,7 @@ function ProductListing() {
         </div>
       </div>
       <div className="max-w-[1320px] w-full flex flex-row items-start gap-6 ">
-         <ProductListingSidebar/>
+         {/* <ProductListingSidebar/> */}
          <Listing/> 
       </div>
     </div>

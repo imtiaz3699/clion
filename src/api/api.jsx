@@ -1,5 +1,8 @@
 import axios from "axios";
 import API from "../helpers/axiosIntercepter";
+import Cookies from "js-cookie";
+const token = Cookies.get("token") ? Cookies.get("token") : null;
+const user = Cookies.get("user") ? JSON.parse(Cookies.get("user")) : null;
 export const fetchProductImages = async () => {
   try {
     const response = await axios.get("https://api.pexels.com/v1/search", {
@@ -47,5 +50,16 @@ export const getBanner = async () => {
     return response;
   } catch (error) {
     console.log(error, "error");
+  }
+};
+
+export const getProductsByCategory = async (page ="", limit="", categoryId="",search="") => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_BASE_URL}/api/product/get-products?page=${page}&limit=${limit}&categoryId=${categoryId}&search=${search}`
+    );
+    return response;
+  } catch (e) {
+    console.log(e);
   }
 };

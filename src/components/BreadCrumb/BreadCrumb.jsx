@@ -9,13 +9,7 @@ function CustomBreadCrumb() {
           title: "Home",
         },
         {
-          title: <a href="">Application Center</a>,
-        },
-        {
-          title: <a href="">Application List</a>,
-        },
-        {
-          title: "An Application",
+          title: <a href="">Product List</a>,
         },
       ]}
     />
