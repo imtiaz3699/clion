@@ -53,13 +53,25 @@ export const getBanner = async () => {
   }
 };
 
-export const getProductsByCategory = async (page ="", limit="", categoryId="",search="") => {
+export const getProductsByCategory = async (page ="", limit="", categoryId="",search="",productId="") => {
   try {
     const response = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}/api/product/get-products?page=${page}&limit=${limit}&categoryId=${categoryId}&search=${search}`
+      `${import.meta.env.VITE_BASE_URL}/api/product/get-products?page=${page}&limit=${limit}&categoryId=${categoryId}&search=${search}&productId=${productId}`
     );
     return response;
   } catch (e) {
     console.log(e);
   }
 };
+export const getRequest = async (url,isToken) => {
+  const headers= {};
+  try {
+    if(isToken){
+      headers["Authorization"] = `Bearer ${token}`
+    }
+    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}${url}`,{headers});
+    return response?.data;
+  }catch (e) {
+    console.log(e);
+  }
+}

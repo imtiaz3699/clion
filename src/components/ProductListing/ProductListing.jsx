@@ -63,7 +63,7 @@ function ProductListing() {
   console.log(currentPage, pagination, "fadlfhlasdjflsd");
 
   return (
-    <div className=" w-full flex flex-col items-center justify-center  mt-[25px]">
+    <div className=" w-full flex flex-col items-center justify-center mt-[25px]">
       <div className="max-w-[1320px] w-full text-start text-[30px] font-medium text-gray-500">
         Products
       </div>
@@ -72,7 +72,7 @@ function ProductListing() {
         {products?.map((product) => {
           return (
             <Fragment key={product?.id}>
-              <Link to={`/product/${product?.id}`}>
+              <Link to={`/product_details/${product?.id}`}>
                 <ProductCard
                   product={product}
                   showFunction={true}
