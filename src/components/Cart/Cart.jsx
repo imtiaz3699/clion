@@ -22,10 +22,10 @@ function Cart() {
       const res = await REMOVE_FROM_CART(id);
       if (res?.status === 200) {
         dispatch(removeItem(id));
-        console.log(res,'fasdfsda')
+        console.log(res, "fasdfsda");
       }
     } catch (error) {
-        console.log(error,);
+      console.log(error);
     }
   };
   const cartItems =
@@ -105,7 +105,10 @@ function Cart() {
           </span>
         </div>
         <Button
-        onClick={() => {navigate("/checkout");setIsOpen(false)}}
+          onClick={() => {
+            navigate("/checkout");
+            setIsOpen(false);
+          }}
           type="primary"
           className="!h-[48px]"
           block
@@ -114,7 +117,10 @@ function Cart() {
           CHECKOUT NOW →
         </Button>
         <Button
-          onClick={() => {navigate("/cart");setIsOpen(false)}}
+          onClick={() => {
+            navigate("/cart");
+            setIsOpen(false);
+          }}
           type="default"
           block
           className="!h-[48px] border-[1x] border-[#FA8232] text-[#FA8232]"

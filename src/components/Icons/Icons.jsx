@@ -18,6 +18,7 @@ import { IoLogoApple } from "react-icons/io5";
 import { VscSignOut } from "react-icons/vsc";
 import { MdArrowBackIos } from "react-icons/md";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { CiDeliveryTruck } from "react-icons/ci";
 
 
 export const CartIcon = ({ className }) => {
@@ -82,4 +83,7 @@ export const BackArrow = ({className}) => {
 }
 export const ThreeDots = ({className}) => {
     return <BsThreeDotsVertical className = {className}/>
+}
+export const Delivery = ({className}) => {
+    return <CiDeliveryTruck className = {className}/>
 }

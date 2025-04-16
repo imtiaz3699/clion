@@ -11,6 +11,7 @@ export const GET_CART = async (page, limit, userId, productId) => {
   const params = {
     page: page,
     limit: limit,
+    guestId:localStorage.getItem("guest_id") ?? "",
   };
   const cleanedParams = Object.fromEntries(
     Object.entries(params).map(([key, value]) => [key, value ?? ""])
@@ -29,7 +30,7 @@ export const GET_CART = async (page, limit, userId, productId) => {
 export const ADD_TO_CART = async (data) => {
   try {
     const response = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}/api/product/create-product`,
+      `${import.meta.env.VITE_BASE_URL}/user/cart/add-to-cart`,
       data,
       config
     );

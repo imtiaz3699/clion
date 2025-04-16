@@ -6,15 +6,12 @@ export const getCart = createAsyncThunk(
   "cart/getCart",
   async (__, { getState, rejectWithValue }) => {
     const { cart } = getState();
-    console.log(cart,'cartInsideCreateThunjk')
     if (cart.items.length > 0) {
       console.log("Cart already has items, skipping API call");
       return rejectWithValue("Cart");
     }
     try {
-      console.log("Calling GET_CART API...");
       const repsonse = await GET_CART(cart.currentPage, cart.limit);
-      console.log("API Response:", repsonse?.data?.data);
       return repsonse?.data?.data;
     } catch (e) {
       return rejectWithValue(error.response?.data || "Something went wrong");
@@ -54,10 +51,10 @@ const cartSlice = createSlice({
       const { id, quantity } = action.payload;
       const product = state.items.find((item) => item.id === id);
       if (product) {
-        product.quantity = product?.product?.quantity <= quantity ? product?.product?.quantity :  quantity;
-        product.sub_total = product?.product?.price * quantity; // Update sub-total
+        product.quantity = quantity;
+        product.sub_total = product?.price * quantity; // Update sub-total
       }
-      state.totalAmount = state.items.reduce((total, item) => total + item.product.price * item.quantity, 0);
+      state.totalAmount = state.items.reduce((total, item) => total + item.price * quantity, 0);
     },
   },
   extraReducers: (builder) => {

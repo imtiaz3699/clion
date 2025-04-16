@@ -45,7 +45,6 @@ function MainNav() {
           <NavSearch />
           <div className="flex flex-row items-center gap-[24px]">
             <Cart />
-
             <User />
           </div>
         </div>

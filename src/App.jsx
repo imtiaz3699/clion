@@ -1,18 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
 import HeroSection from './components/LandingPage/HeroSection/HeroSection'
-import OurCommitments from './components/OurCommitments/OurCommitments'
-import BestDeals from './components/LandingPage/HeroSection/BestDeals/BestDeals'
 import Categories from './components/Categories/Categories'
-import FeaturedProducts from './components/LandingPage/FeaturedProducts/FeaturedProducts'
-import SaleeProduct from './components/LandingPage/SaleProduct/SaleeProduct'
 import ProductListing from './components/ProductListing/ProductListing'
 
 function App() {
   const [count, setCount] = useState(0)
-
+  function getOrCreateGuestId() {
+    let guestId = localStorage.getItem("guest_id");
+    if (!guestId) {
+      guestId = crypto.randomUUID();
+      localStorage.setItem("guest_id", guestId);
+    }
+    return guestId;
+  }
+  useEffect(() => {
+    getOrCreateGuestId();
+  }, []);
   return (
     <div className = 'text-black text-[50px]'>
     <HeroSection/>

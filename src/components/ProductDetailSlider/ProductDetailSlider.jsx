@@ -4,29 +4,20 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 
-function ProductDetailSlider({ images }) {
+function ProductDetailSlider({ images, onClick }) {
   return (
-    <Swiper
-      slidesPerView={3} // Show 3 slides at a time
-      navigation={true} // Enable navigation
-      spaceBetween={20} // Add space between slides
-      modules={[Navigation]} // Import Navigation module
-      className="mySwiper flex items-center justify-center"
-    >
+    <div className = 'flex flex-row items-center  gap-5'>
       {images?.map((element, idx) => {
         return (
-          <SwiperSlide
-            key={element}
-            className="flex items-center justify-center  w-[96px] h-[96px]"
-          >
-            <div className="border-[1px] border-gray-300 w-[96px] h-[96px]">
+          <div key={element} className="   " onClick={onClick}>
+            <div className=" w-[96px] h-[96px]">
               {" "}
-            <img src={element} />{" "}
+              <img src={element} className="object-cover w-full h-full" />{" "}
             </div>
-          </SwiperSlide>
+          </div>
         );
       })}
-    </Swiper>
+    </div>
   );
 }
 
